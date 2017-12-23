@@ -10,10 +10,6 @@ router.get('/about', (req, res) => {
     res.send('About');
 });
 
-router.get('/about', (req, res) => {
-    res.send('About');
-});
-
 router.get('/delivery', (req, res) => {
     res.send('delivery');
 });
