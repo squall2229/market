@@ -1,0 +1,16 @@
+extends ../_layout
+
+block main
+  .container
+    form.form-auth
+      .form-group
+        label(for='login') Логин
+        input#login.form-control(type='text', placeholder='')
+      .form-group
+        label(for='password') Пароль
+        input#password.form-control(type='password', placeholder='')
+      .form-group
+        button.btn.btn-primary.btn-right-margin(type='submit') Подтвердить
+        a.btn.btn-primary(href='/auth/register') Зарегистрироваться
+      .form-group
+        a(href='/auth/remember') Забыли пароль?

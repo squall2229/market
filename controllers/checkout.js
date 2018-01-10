@@ -1,5 +1,8 @@
 module.exports = {
   showCheckout(req, res) {
-    res.send('checkout item');
+    res.render('checkout/checkout', {
+      title: 'Корзина', 
+      id: 'checkout'
+    });
   }
 }

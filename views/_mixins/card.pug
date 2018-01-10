@@ -1,0 +1,7 @@
+mixin card(name, text, id)
+  .card(style='width: 20rem;')
+    img.card-img-top(src='http://via.placeholder.com/250x150', alt='Card image cap')
+    .card-block
+      h4.card-title=name
+      p.card-text=text
+      a.btn.btn-primary(href=`item/${id}`) Подробнее

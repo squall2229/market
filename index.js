@@ -1,20 +1,33 @@
 const express = require('express');
 const path = require('path');
-const itemsRouter = require('./routers/items');
-const mainRouter = require('./routers/main');
-const registrationRouter = require('./routers/registration');
-const userRouter = require('./routers/user');
-const checkoutRouter = require('./routers/checkout');
+const logger = require('morgan');
 
-const server = express();
+const config = require('./config');
+const { error } = require('./middleware');
+const routers = require('./routers');
 
-server.use(express.static(path.join(__dirname, 'public')));
+const app = express();
 
-server.use('/', mainRouter);
+app.set('view engine', 'pug');
+app.set('views', config.paths.views);
+app.set('config', config);
 
-server.use('/items', itemsRouter);
-server.use('/registration', registrationRouter);
-server.use('/user', userRouter);
-server.use('/checkout', checkoutRouter);
+app.locals.version = config.version;
 
-server.listen(3000, () => console.log('Express', 3000));
+app.use(express.static(config.paths.public));
+app.use('/lib', express.static(config.paths.lib));
+
+app.use(logger('dev'));
+
+app.use('/', routers.main);
+
+app.use('/user', routers.user);
+app.use('/checkout', routers.checkout);
+app.use('/about', routers.about);
+app.use('/delivery', routers.delivery);
+app.use('/auth', routers.auth);
+
+app.use(error.notFound);
+app.use(app.get('env') === 'development' ? error.development : error.production);
+
+app.listen(config.port, () => console.log('Express:', config.port));

@@ -1,0 +1,17 @@
+nav.navbar.navbar-toggleable-md.navbar-light.bg-faded
+  button.navbar-toggler.navbar-toggler-right(type='button', data-toggle='collapse', data-target='#navbarSupportedContent', aria-controls='navbarSupportedContent', aria-expanded='false', aria-label='Toggle navigation')
+    span.navbar-toggler-icon
+  a.navbar-brand(href='/') Главная
+  #navbarSupportedContent.collapse.navbar-collapse
+    ul.navbar-nav.mr-auto.justify-center
+      li.nav-item.active
+        a.nav-link(href='/delivery') Доставка и оплата
+      li.nav-item
+        a.nav-link(href='/about') Контакты
+      li.nav-item
+        a.nav-link(href='/auth/login') Вход/Регистрация
+      li.nav-item
+        a.nav-link(href='/checkout') Корзина
+    form.form-inline.my-2.my-lg-0
+      input.form-control.mr-sm-2(type='text', placeholder='Поиск')
+      button.btn.btn-outline-success.my-2.my-sm-0(type='submit') Поиск

@@ -1,0 +1,20 @@
+extends ../_layout
+
+block main
+  .container
+    form.form-auth
+      .form-group
+        label(for='name') Имя
+        input#name.form-control(type='text', placeholder='')
+      .form-group
+        label(for='surname') Фамилия
+        input#surname.form-control(type='text', placeholder='')
+      .form-group
+        label(for='email') Почта
+        input#email.form-control(type='email', placeholder='')
+      .form-group
+        label(for='old') Возраст
+        input#old.form-control(type='number', placeholder='')
+      .form-group
+        button.btn.btn-primary.btn-right-margin(type='submit') Подтвердить
+      

@@ -1,17 +1,8 @@
 const { Router } = require('express');
-
 const router = Router();
+const { main: { showMain, showItem } } = require('../controllers');
 
-router.get('/', (req, res) => {
-    res.send('Hello Express');
-});
-
-router.get('/about', (req, res) => {
-    res.send('About');
-});
-
-router.get('/delivery', (req, res) => {
-    res.send('delivery');
-});
+router.get('/', showMain);
+router.get('/item/:id', showItem);
 
 module.exports = router;

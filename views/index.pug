@@ -1,0 +1,13 @@
+extends _layout
+include _mixins/card
+
+block main
+  .container
+    .row
+      each val in data
+        .col
+          +card(val.title, val.text, val.id)
+
+
+
+

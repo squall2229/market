@@ -1,0 +1,12 @@
+extends ../_layout
+
+block main
+  .container
+    .row
+      .col
+        img(src='http://via.placeholder.com/400x300' width=400 height=300)
+      .col
+        h2=item.title
+        p=item.text
+        button.btn.btn-primary Купить
+

@@ -3,15 +3,30 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "scripts": {
+    "start": "node index",
+    "dev": "nodemon -r dotenv/config index.js",
+    "sass": "gulp watch:sass",
+    "lint": "eslint"
+  },
   "dependencies": {
-    "express": "^4.16.2"
+    "bootstrap": "^4.0.0-alpha.6",
+    "dotenv": "^4.0.0",
+    "express": "^4.16.2",
+    "jquery": "^3.2.1",
+    "material-components-web": "^0.27.0",
+    "normalize.css": "^7.0.0",
+    "pug": "^2.0.0-rc.4",
+    "tether": "^1.4.3"
   },
   "devDependencies": {
+    "eslint": "^4.14.0",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^4.0.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^3.1.0",
+    "morgan": "^1.9.0",
     "nodemon": "^1.13.3"
-  },
-  "scripts": {
-    "dev": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",

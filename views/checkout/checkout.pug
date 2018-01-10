@@ -1,0 +1,39 @@
+extends ../_layout
+
+block main
+  .container
+    table.table
+      thead
+        tr
+          th #
+          th Наименование товара
+          th Превью
+          th Кол-во
+          th Сумма
+      tbody
+        tr
+          th(scope='row') 1
+          th товар
+          th
+            img(src='http://via.placeholder.com/50x50' width=50 height=50)
+          th 1
+          th 100
+        tr
+          th(scope='row') 2
+          th товар
+          th
+            img(src='http://via.placeholder.com/50x50' width=50 height=50)
+          th 2
+          th 200
+        tr
+          th(scope='row') 3
+          th товар
+          th
+            img(src='http://via.placeholder.com/50x50' width=50 height=50)
+          th 1
+          th 300
+        tr
+          th(colspan=5) Итоговая сумма = 600
+
+
+      
