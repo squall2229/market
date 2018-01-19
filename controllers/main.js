@@ -1,4 +1,3 @@
-const data = require('../data/');
 const { connect, ObjectID } = require('../services/db');
 
 module.exports = {
@@ -29,11 +28,10 @@ module.exports = {
     },
 
   showItem(req, res) {
-    let item = data.find(item => item.id == req.params.id);
     res.render('item/item', {
       id: 'main',
-      title: item.title,
-      item
+      title: req.item.title,
+      item: req.item
     });
   }
 }

@@ -6,8 +6,4 @@ block main
     .row
       each val in data
         .col
-          +card(val.title, val.price + ' ' + val.size, val.id)
-
-
-
-
+          +card(val.title, val.price, val.size, val._id, val.image)

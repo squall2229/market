@@ -1,8 +1,8 @@
 const { Router } = require('express');
 const router = Router();
-const { main: { showMain, showItem } } = require('../controllers');
+const { main: { showMain, showItem, findOne } } = require('../controllers');
 
-// router.param('id', findOne);
+router.param('id', findOne);
 router.get('/', showMain);
 router.get('/item/:id', showItem);
 
