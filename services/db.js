@@ -1,6 +1,6 @@
 const { MongoClient, ObjectID } = require('mongodb');
 
-const connect = MongoClient.connect('mongodb://localhost:27017');
+const connect = MongoClient.connect('mongodb://squall2229:Finalfantasy8@ds253587.mlab.com:53587/market');
 
 const db = {
     connect() {
