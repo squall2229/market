@@ -1,31 +1,32 @@
-const { connect, ObjectID } = require('../services/db');
+const { tshirt: Tshirt } = require('../models');
 
 module.exports = {
   findOne(req, res, next, id) {
-    connect().then(collection => {
-      collection.findOne({ _id: ObjectID(id) })
-        .then(item => {
-          req.item = item;
+    Tshirt.findOne({ _id: id })
+      .then(item => {
+        if (!item) {
+          let error = new Error('Товар не найден');
+          error.status = 404;
+          throw error;
+        }
 
-          next();
-        })
-        .catch(next);
-    });
+        req.item = item;
+
+        next();
+      })
   },
 
-  showMain(req, res) {
-    connect()
-      .then(collection => {
-        collection.find().toArray()
-          .then(data => {
-            res.render('index', {
-              id: 'main',
-              title: 'Market',
-              data
-            });
-          })
-      })
-    },
+  showMain(req, res, next) {
+    Tshirt.find()
+      .then(data => {
+        res.render('index', {
+          id: 'main',
+          title: 'Market',
+          data
+        });
+      })   
+      .catch(next) 
+  },
 
   showItem(req, res) {
     res.render('item/item', {

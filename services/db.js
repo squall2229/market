@@ -1,21 +1,22 @@
-const { MongoClient, ObjectID } = require('mongodb');
+const mongoose = require('mongoose');
 
-const connect = MongoClient.connect('mongodb://squall2229:Finalfantasy8@ds253587.mlab.com:53587/market');
+const { mongodbUri } = require('../config');
 
-const db = {
-    connect() {
-        return connect.then(client => client.db('market').collection('tshirts'));
-    },
+mongoose.Promise = global.Promise;
 
-    close() {
-        return connect.then(client => client.close());
-    },
+mongoose.connect(mongodbUri.development);
 
-    ObjectID
-};
+mongoose.connection.on('error', console.error.bind(console, 'MongoDB connection error:'));
+mongoose.connection.once('open', () => console.log('Connected to MongoDB'));
+mongoose.connection.on('disconnected', () => console.log('Disconnected from MongoDB'));
 
 process.on('SIGINT', () => {
-    db.close().then(() => process.exit(0));
+    mongoose.connection.close(() => {
+        console.log('Mongoose disconnected through app termination');
+        process.exit(0);
+    });
 });
 
-module.exports = db;
+module.exports = {
+    connection: mongoose.connection
+};

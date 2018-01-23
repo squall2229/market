@@ -13,16 +13,13 @@ html(lang='ru')
     link(rel='stylesheet' href='/lib/bootstrap/dist/css/bootstrap.min.css')
     link(rel='stylesheet' href=`/css/app.css?v=${version}`)
 
-    //- script(src='/lib/material-components-web/dist/material-components-web.min.js')
-
   block head
-  body(id=`${id}-page` class=className).mdc-typography
+  body(id=`${id}-page` class=className)
     block header
       include _includes/toolbar
 
     block content
       section#content
-          //- include _includes/sidenav
 
       block main
 
