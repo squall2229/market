@@ -1,8 +1,9 @@
 extends _layout
+include _mixins/list
 
-block main
+block append main
   .container
-    ul.list-group
-      each item in items
-        li.list-group-item= item.title
+    +list(items)
+    .form-group
+      a(href='/admin/create').btn.btn-primary Добавить товар
 

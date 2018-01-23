@@ -1,8 +1,8 @@
-const { tshirt: Tshirt } = require('../models');
+const { tshirt } = require('../models');
 
 module.exports = {
   findOne(req, res, next, id) {
-    Tshirt.findOne({ _id: id })
+    tshirt.findById({ _id: id })
       .then(item => {
         if (!item) {
           let error = new Error('Товар не найден');
@@ -17,15 +17,15 @@ module.exports = {
   },
 
   showMain(req, res, next) {
-    Tshirt.find()
+    tshirt.find()
       .then(data => {
         res.render('index', {
           id: 'main',
-          title: 'Market',
+          title: 'main',
           data
-        });
-      })   
-      .catch(next) 
+        })
+      })
+      .catch(next)
   },
 
   showItem(req, res) {

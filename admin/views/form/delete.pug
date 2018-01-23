@@ -1,0 +1,14 @@
+extends ../_layout
+
+block main
+  .container
+    .row.justify-content-center
+      form(method='post')
+        .form-group
+          p Вы точно хотите удалить товар ?
+          .form-group
+            .row.justify-content-center
+              .col
+                button.btn.btn-primary Да
+              .col
+                a.btn.btn-primary(href='/admin') Нет

@@ -1,6 +1,5 @@
 const express = require('express');
 const path = require('path');
-
 const admin = express();
 
 const routers = require('./routers');

@@ -2,10 +2,11 @@ const express = require('express');
 const path = require('path');
 const logger = require('morgan');
 
+const db = require('./services/db');
 const config = require('./config');
 const { error } = require('./middleware');
 const routers = require('./routers');
-// const admin = require('./admin');
+const admin = require('./admin');
 
 const app = express();
 
@@ -29,7 +30,7 @@ app.use('/checkout', routers.checkout);
 app.use('/about', routers.about);
 app.use('/delivery', routers.delivery);
 app.use('/auth', routers.auth);
-// app.use('/admin', admin);
+app.use('/admin', admin);
 
 app.use(error.notFound);
 app.use(app.get('env') === 'development' ? error.development : error.production);

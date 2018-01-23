@@ -6,6 +6,6 @@ const Tshirt = new Schema({
   size: [String],
   price: Number,
   image: String
-});
+})
 
-module.exports = mongoose.model('Tshirt', Tshirt);  // Tshirt => tshirt => tshirts
+module.exports = mongoose.model('Tshirt', Tshirt);
