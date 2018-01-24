@@ -6,7 +6,13 @@ block main
       .col
         img(src=item.image width=400 height=400)
       .col
-        h2=item.title
-        p=item.text
-        button.btn.btn-primary Купить
+        form(method='post')
+          h2=item.title
+          p=item.text
+          p=item.price
+          .form-group
+            label(for='price') Количество
+            input#price.form-control(type='number', min=1 placeholder='' name='count' value=1 required)
+          input#title(type='text' name='title' hidden=true value=item.title)
+          button.btn.btn-primary Купить
 

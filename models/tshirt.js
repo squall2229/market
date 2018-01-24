@@ -3,9 +3,9 @@ const Schema = mongoose.Schema;
 
 const Tshirt = new Schema({
   title: String,
-  size: [String],
   price: Number,
-  image: String
+  image: String,
+  size: [{ type: String }]
 })
 
 module.exports = mongoose.model('Tshirt', Tshirt);

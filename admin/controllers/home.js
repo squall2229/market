@@ -56,20 +56,24 @@ module.exports = {
       image: req.body.image,
       size
     })
-      .then((result) => res.redirect('/admin'))
+      .then(() => res.redirect('/admin'))
       .catch(next)
   },
 
   updateForm(req, res, next) {
-    let size = sendsize(req.body) || [];
-
-    Tshirt.findOneAndUpdate({ _id: req.item._id }, { new: true }, {
-      title: req.body.title,
-      price: +req.body.price,
-      image: req.body.image,
-      size
+    Tshirt.findByIdAndUpdate( 
+      { _id: req.item._id },
+      {
+        $set: {
+          title: req.body.title,
+          price: Number(req.body.price),
+          image: req.body.image,
+          size: sendsize(req.body)
+        }
+    }, {
+      new: true
     })
-      .then((result) => res.redirect('/admin'))
+      .then(() => res.redirect('/admin'))
       .catch(next)
   },
 

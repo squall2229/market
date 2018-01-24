@@ -9,10 +9,10 @@ block main
     form(method='post')
       .form-group
         label(for='title') Название
-        input#title.form-control(type='text', placeholder='' name='title' value=title)
+        input#title.form-control(type='text', placeholder='' name='title' value=title required)
       .form-group
         label(for='price') Цена
-        input#price.form-control(type='text', placeholder='' name='price' value=price)
+        input#price.form-control(type='number', min=0 placeholder='' name='price' value=price required)
       .form-group
         label(for='image') Ссылка на изображение
         input#image.form-control(type='text', placeholder='' name='image' value=image)

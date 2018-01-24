@@ -1,4 +1,4 @@
-const { tshirt } = require('../models');
+const { tshirt, checkout } = require('../models');
 
 module.exports = {
   findOne(req, res, next, id) {
@@ -24,6 +24,21 @@ module.exports = {
           title: 'main',
           data
         })
+      })
+      .catch(next)
+  },
+
+  addItem(req, res, next) {
+    console.log(req.body);
+    checkout.findByIdAndUpdate(
+      { _id: req.item._id }, 
+      Object.assign(req.body, { price: req.item.price }), 
+      {
+        upsert: true, 
+        new: true 
+      })
+      .then((result) => {
+        res.redirect('/');
       })
       .catch(next)
   },
