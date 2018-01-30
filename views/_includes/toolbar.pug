@@ -9,7 +9,12 @@ nav.navbar.navbar-toggleable-md.navbar-light.bg-faded
       li.nav-item(class={active: id === 'about'})
         a.nav-link(href='/about') Контакты
       li.nav-item(class={active: id === 'login'})
-        a.nav-link(href='/auth/login') Вход/Регистрация
+        unless user
+          a.nav-link(href='/auth/login') Вход/Регистрация
+        else
+          .row
+            a.nav-link(href='/user')= user.email
+            a.nav-link(href='/auth/logout') Выйти
       li.nav-item(class={active: id === 'checkout'})
         a.nav-link(href='/checkout') Корзина
     form.form-inline.my-2.my-lg-0

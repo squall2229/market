@@ -2,13 +2,13 @@ extends ../_layout
 
 block main
   .container
-    form.form-auth
+    form.form-auth(method='post')
       .form-group
-        label(for='login') Логин
-        input#login.form-control(type='text', placeholder='')
+        label(for='email') Почта
+        input#email.form-control(name='email'  type='email', placeholder='' required)
       .form-group
         label(for='password') Пароль
-        input#password.form-control(type='password', placeholder='')
+        input#password.form-control(name='password' type='password', placeholder='' required)
       .form-group
         button.btn.btn-primary.btn-right-margin(type='submit') Подтвердить
         a.btn.btn-primary(href='/auth/register') Зарегистрироваться

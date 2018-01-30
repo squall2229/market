@@ -1,5 +1,8 @@
 module.exports = {
   showUser(req, res) {
-    res.send('user setting');
+    res.render('user/', {
+      id: 'user',
+      title: 'Личный кабинет'
+    });
   }
 }

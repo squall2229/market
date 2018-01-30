@@ -1,10 +1,12 @@
 const express = require('express');
 const path = require('path');
 const logger = require('morgan');
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
 
 const db = require('./services/db');
 const config = require('./config');
-const { error } = require('./middleware');
+const { error, auth } = require('./middleware');
 const routers = require('./routers');
 const admin = require('./admin');
 
@@ -20,16 +22,36 @@ app.locals.basedir = config.paths.views;
 app.use(express.static(config.paths.public));
 app.use('/lib', express.static(config.paths.lib));
 app.use(express.urlencoded({ extended: false }));
+app.use(session({
+  name: 'sessionId',
+  secret: config.sessionSecret,
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+      httpOnly: true,
+      // secure: true,
+      signed: true,
+      maxAge: 1000 * 60 * 60 * 24 * 3 // 3 days
+  },
+  store: new MongoStore({
+      mongooseConnection: db.connection,
+      ttl: 60 * 60 * 24 * 3, // 3 days
+      touchAfter: 60 * 60 * 24 // 1 day
+  })
+}));
 
 app.use(logger('dev'));
 
-app.use('/', routers.main);
+app.use(auth.findUser);
 
-app.use('/user', routers.user);
+app.use('/', routers.main);
+app.use('/auth', routers.auth);
 app.use('/checkout', routers.checkout);
 app.use('/about', routers.about);
 app.use('/delivery', routers.delivery);
-app.use('/auth', routers.auth);
+
+app.use(auth.authenticated);
+app.use('/user', routers.user);
 app.use('/admin', admin);
 
 app.use(error.notFound);

@@ -5,7 +5,7 @@ module.exports = {
     Checkout.findById({ _id: id })
         .then(checkoutItem => {
             if (!checkoutItem) {
-                let error = new Error('Книга не найдена');
+                let error = new Error('Товар не найден');
                 error.status = 404;
                 throw error;
             }

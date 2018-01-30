@@ -3,6 +3,7 @@ const path = require('path');
 module.exports = {
   version: '1.0.0',
   port: process.env.PORT || 3000,
+  sessionSecret: 'HacJmB3ma6crKKtK',
   mongodbUri: {
     development: 'mongodb://vlad:squaresoft@ds253587.mlab.com:53587/market'
   },
