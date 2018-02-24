@@ -14,7 +14,9 @@ const User = new mongoose.Schema({
   password: { type: String, required: true },
   age: Number,
   name: String,
-  surname: String
+  surname: String,
+  username: String,
+  photo: String
 }, {
   timestamps: true
 });
@@ -37,6 +39,10 @@ User.post('save', function(error, user, next) {
     next(error);
   }
 });
+
+User.methods.isCorrectPassword = function(password) {
+  return bcrypt.compare(password, this.password)
+};
 
 User.statics.authenticate = function(email, password) {
   return this.findOne({ email })

@@ -4,7 +4,7 @@ const logger = require('morgan');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 
-const db = require('./services/db');
+const { db, passport } = require('./services');
 const config = require('./config');
 const { error, auth } = require('./middleware');
 const routers = require('./routers');
@@ -40,9 +40,13 @@ app.use(session({
   })
 }));
 
-app.use(logger('dev'));
+app.use(passport.initialize());
+app.use(passport.session());
 
-app.use(auth.findUser);
+app.use((req, res, next) => {
+  res.locals.user = req.user;
+  next();
+});
 
 app.use('/', routers.main);
 app.use('/auth', routers.auth);
