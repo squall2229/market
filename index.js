@@ -1,28 +1,30 @@
 const express = require('express');
-const path = require('path');
 const logger = require('morgan');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 
-const { db, passport } = require('./services');
-const config = require('./config');
-const { error, auth } = require('./middleware');
-const routers = require('./routers');
+const services= require('./shared/services');
+const config = require('./shared/config');
+const middleware = require('./shared/middleware');
+
+const main = require('./main');
 const admin = require('./admin');
+const api = require('./api');
 
-const app = express();
+const server = express();
 
-app.set('view engine', 'pug');
-app.set('views', config.paths.views);
-app.set('config', config);
+server.set('view engine', 'pug');
+server.set('views', config.paths.views);
+server.set('config', config);
 
-app.locals.version = config.version;
-app.locals.basedir = config.paths.views;
+server.locals.version = config.version;
+server.locals.basedir = config.paths.views;
 
-app.use(express.static(config.paths.public));
-app.use('/lib', express.static(config.paths.lib));
-app.use(express.urlencoded({ extended: false }));
-app.use(session({
+server.use(express.static(config.paths.public));
+server.use('/lib', express.static(config.paths.lib));
+server.use(express.urlencoded({ extended: false }));
+server.use(express.json());
+server.use(session({
   name: 'sessionId',
   secret: config.sessionSecret,
   resave: false,
@@ -34,31 +36,20 @@ app.use(session({
       maxAge: 1000 * 60 * 60 * 24 * 3 // 3 days
   },
   store: new MongoStore({
-      mongooseConnection: db.connection,
+      mongooseConnection: services.db.connection,
       ttl: 60 * 60 * 24 * 3, // 3 days
       touchAfter: 60 * 60 * 24 // 1 day
   })
 }));
 
-app.use(passport.initialize());
-app.use(passport.session());
+server.use(services.passport.initialize());
+server.use(services.passport.session());
 
-app.use((req, res, next) => {
-  res.locals.user = req.user;
-  next();
-});
+server.use('/', main);
+server.use('/api', api);
+server.use('/admin', admin);
 
-app.use('/', routers.main);
-app.use('/auth', routers.auth);
-app.use('/checkout', routers.checkout);
-app.use('/about', routers.about);
-app.use('/delivery', routers.delivery);
+server.use(middleware.error.notFound);
+server.use(server.get('env') === 'development' ? middleware.error.development : middleware.error.production);
 
-app.use(auth.authenticated);
-app.use('/user', routers.user);
-app.use('/admin', admin);
-
-app.use(error.notFound);
-app.use(app.get('env') === 'development' ? error.development : error.production);
-
-app.listen(config.port, () => console.log('Express:', config.port));
+server.listen(config.port, () => console.log('Express:', config.port));

@@ -1,4 +1,4 @@
-const { passport } = require('../services');
+const { passport } = require('../../shared/services');
 
 module.exports = {
   showLogin(req, res) {

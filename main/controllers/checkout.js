@@ -1,4 +1,4 @@
-const { checkout: Checkout } = require('../models');
+const { checkout: Checkout } = require('../../shared/models');
 
 module.exports = {
   findItem(req, res, next, id) {

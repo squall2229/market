@@ -1,5 +1,5 @@
-const { tshirt: Tshirt } = require('../../models');
-const sendsize = require('../../utils/sendsize');
+const { tshirt: Tshirt } = require('../../shared/models');
+const sendsize = require('../../shared/utils/sendsize');
 
 module.exports = {
   findOne(req, res, next, id) {

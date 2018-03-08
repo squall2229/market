@@ -1,5 +1,7 @@
 const path = require('path');
 
+const ROOT_PATH = path.resolve(__dirname, '..', '..');
+
 module.exports = {
   version: '1.0.0',
   port: process.env.PORT || 3000,
@@ -8,9 +10,9 @@ module.exports = {
     development: process.env.MONGODB_MLABURL
   },
   paths: {
-    views: path.resolve(__dirname, '..', 'views'),
-    public: path.resolve(__dirname, '..', 'public'),
-    lib: path.resolve(__dirname, '..', 'node_modules')
+    views: path.resolve(ROOT_PATH, 'shared', 'views'),
+    public: path.resolve(ROOT_PATH, 'shared', 'public'),
+    lib: path.resolve(ROOT_PATH, 'node_modules')
   },
   oauth: {
     github: {
