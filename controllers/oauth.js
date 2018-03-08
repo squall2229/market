@@ -10,7 +10,9 @@ module.exports = {
   },
 
   vk: {
-    authenticate: passport.authenticate('vkontakte'),
+    authenticate: passport.authenticate('vkontakte', {
+      scope: ['status', 'email', 'friends', 'notify']
+    }),
     callback: passport.authenticate('vkontakte', {
       failureRedirect: '/auth/login',
       successRedirect: '/user'
