@@ -24,6 +24,7 @@ server.use(express.static(config.paths.public));
 server.use('/lib', express.static(config.paths.lib));
 server.use(express.urlencoded({ extended: false }));
 server.use(express.json());
+server.use(logger('dev'))
 server.use(session({
   name: 'sessionId',
   secret: config.sessionSecret,

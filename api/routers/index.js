@@ -1,3 +1,4 @@
 module.exports = {
-  tshirt: require('./tshirt')
+  tshirt: require('./tshirt'),
+  auth: require('./auth')
 }

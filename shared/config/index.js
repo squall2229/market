@@ -6,6 +6,7 @@ module.exports = {
   version: '1.0.0',
   port: process.env.PORT || 3000,
   sessionSecret: 'HacJmB3ma6crKKtK',
+  jwtSecret: 'pxJLp4EN83sIjav34Si3hn3hvLtiuY',
   mongodbUri: {
     development: process.env.MONGODB_MLABURL
   },
